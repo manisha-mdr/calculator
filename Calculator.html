@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>Calculator</title>
+    </head>
+    <body>
+        <h1>Calculator</h1>
+        <input type="text" id="result" disabled>s
+        <br>
+        <button onclick="addNumber(1)">1</button>
+        <button onclick="addNumber(2)">2</button>
+        <button onclick="addNumber(3)">3</button>
+        <button onclick="addOperator('+')">+</button>
+        <br>
+        <button onclick="addNumber(4)">4</button>
+        <button onclick="addNumber(5)">5</button>
+        <button onclick="addNumber(6)">6</button>
+        <button onclick="addOperator('-')">-</button>
+        <br>
+        <button onclick="addNumber(7)">7</button>
+        <button onclick="addNumber(8)">8</button>
+        <button onclick="addNumber(9)">9</button>
+        <button onclick="addOperator('*')">*</button>
+        <br>
+        <button onclick="addNumber(0)">0</button>
+        <button onclick="clearResult()">C</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="addOperator('/')">/</button>
+        <br>
+        <script>
+            let num1 = '';
+            let num2 = '';
+            let operator = '';
+            let result = document.getElementById('result');
+
+            function addNumber(num) {
+                if (operator === '') {
+                    num1 += num;
+                    result.value = num1;
+                } else {
+                    num2 += num;
+                    result.value = num2;
+                }
+            }
+
+            function addOperator(op) {
+                if (num1 !== '' && num2 === '') {
+                    operator = op;
+                } else if (num1 !== '' && num2 !== '') {
+                    calculate();
+                    operator = op;
+                }
+            }
+
+            function clearResult() {
+                num1 = '';
+                num2 = '';
+                operator = '';
+                result.value = '';
+            }
+
+            function calculate() {
+                let num1Int = parseInt(num1);
+                let num2Int = parseInt(num2);
+                let answer;
+                switch (operator) {
+                    case '+':
+                        answer = num1Int + num2Int;
+                        break;
+                    case '-':
+                        answer = num1Int - num2Int;
+                        break;
+                    case '*':
+                        answer = num1Int * num2Int;
+                        break;
+                    case '/':
+                        answer = num1Int / num2Int;
+                        break;
+                }
+                result.value = answer;
+                num1 = answer.toString();
+                num2 = '';
+                operator = '';
+            }
+        </script>
+    </body>
+</html>
